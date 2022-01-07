@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class App extends Component {
   constructor() {
@@ -17,7 +18,7 @@ class App extends Component {
     const { initialState } = this.state;
     return (
       <div className="app">
-        <h1>{initialState}</h1>
+        <h1 className="title">{initialState}</h1>
       </div>
     );
   }

@@ -1,0 +1,10 @@
+body {
+  background: url('mario_wallpaper.png') no-repeat center center fixed;
+  background-color: black;
+  color: cornsilk;
+  font-family: sans-serif;
+}
+
+.title {
+  text-align: center;
+}
