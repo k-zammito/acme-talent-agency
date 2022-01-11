@@ -27,6 +27,7 @@ const ClientSkills = conn.define('clientSkills', {});
 // ASSOCIATIONS:
 ClientSkills.belongsTo(Client);
 ClientSkills.belongsTo(Skill);
+
 Client.hasMany(ClientSkills);
 Skill.hasMany(ClientSkills);
 

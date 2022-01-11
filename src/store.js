@@ -3,6 +3,12 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
+const initialState = {
+  clients: [],
+  skills: [],
+  clientSkills: [],
+};
+
 //----------ACTIONS-----------
 
 const GET_CLIENTS = 'GET_CLIENTS';
@@ -103,19 +109,25 @@ export const deleteClientSkill = (clientSkill) => {
 
 //----------REDUCER----------
 
-const clientsReducer = (state = [], action) => {
+const clients = (state = initialState, action) => {
   switch (action.type) {
     case GET_CLIENTS:
-      return action.clients;
+      return {
+        ...state,
+        clients: action.clients,
+      };
     default:
       return state;
   }
 };
 
-const skillsReducer = (state = [], action) => {
+const skills = (state = initialState, action) => {
   switch (action.type) {
     case GET_SKILLS:
-      return action.skills;
+      return {
+        ...state,
+        skills: action.skills,
+      };
     case UPDATE_SKILL: // if new skill id === orignal id, replace original skill with new skill
       return state.map((skill) =>
         skill.id === action.skill.id ? action.skill : skill
@@ -125,7 +137,7 @@ const skillsReducer = (state = [], action) => {
   }
 };
 
-const clientSkillsReducer = (state = [], action) => {
+const clientSkills = (state = initialState, action) => {
   switch (action.type) {
     case GET_CLIENT_SKILLS:
       return action.clientSkills;
@@ -141,9 +153,9 @@ const clientSkillsReducer = (state = [], action) => {
 };
 
 const reducer = combineReducers({
-  clients: clientsReducer,
-  skills: skillsReducer,
-  clientSkills: clientSkillsReducer,
+  clients,
+  skills,
+  clientSkills,
 });
 
 //----------STORE----------

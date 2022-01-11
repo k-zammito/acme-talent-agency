@@ -1,27 +1,41 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import store, { getClients, getSkills } from './store';
+import Clients from './components/Clients';
+import Skills from './components/Skills';
 
 class App extends Component {
-  constructor() {
-    super();
-    // this.state = store.getState();
-    this.state = {
-      initialState: '',
-    };
-  }
-
   componentDidMount() {
-    this.setState({ initialState: 'Hello From The Mushroom Kingdom!' });
+    // THIS FILLS UP THE STATE OBJECT ARRAYS WITH DATA TO USE FOR MAPPNG
+    store.dispatch(getClients());
+    store.dispatch(getSkills());
   }
 
   render() {
-    const { initialState } = this.state;
+    const { clients, skills } = this.props;
+    console.log(this.props);
     return (
       <div className="app">
-        <h1 className="title">{initialState}</h1>
+        <Clients />
+        <Skills />
+        {/* <div className="clients">
+          <h3>Clients</h3>
+          {clients.clients.map((client) => {
+            return <div key={client.id}>{client.name}</div>;
+          })}
+        </div> */}
+        {/* <div className="skills">
+          <h3>Skills</h3>
+          {skills.skills.map((skill) => {
+            return <div key={skill.id}>{skill.name}</div>;
+          })}
+        </div> */}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps)(App);
